@@ -24,12 +24,28 @@ class _ChallengePageState extends State<ChallengePage> {
       ),
       bottomNavigationBar: SafeArea(
         bottom: true,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            NextButtonWidget(label: "Fácil"),
-            NextButtonWidget(label: "Confirmar"),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: NextButtonWidget.white(
+                  label: "Fácil",
+                ),
+              ),
+              SizedBox(
+                width: 7,
+              ),
+              Expanded(
+                child: NextButtonWidget.green(
+                  label: "Confirmar",
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
