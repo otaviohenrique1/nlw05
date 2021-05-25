@@ -23,9 +23,9 @@ class _ChallengePageState extends State<ChallengePage> {
 
   @override
   void initState() {
-    controller.currentPageNotifier.addListener(() {
-      setState(() {});
-    });
+    // controller.currentPageNotifier.addListener(() {
+    //   setState(() {});
+    // });
     pageController.addListener(() {
       controller.currentPage = pageController.page!.toInt() + 1;
     });
@@ -47,15 +47,19 @@ class _ChallengePageState extends State<ChallengePage> {
                 icon: Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
               ),
-              QuestionIndicatorWidget(
-                currentPage: controller.currentPage,
-                length: widget.questions.length,
+              ValueListenableBuilder<int>(
+                valueListenable: controller.currentPageNotifier,
+                builder: (context, value, _) => QuestionIndicatorWidget(
+                  currentPage: value,
+                  length: widget.questions.length,
+                ),
               ),
             ],
           ),
         ),
       ),
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: pageController,
         children: widget.questions
             .map(
@@ -76,8 +80,12 @@ class _ChallengePageState extends State<ChallengePage> {
             children: [
               Expanded(
                 child: NextButtonWidget.white(
-                  label: "Fácil",
-                  onTap: () {},
+                  label: "Pular",
+                  onTap: () {
+                    pageController.nextPage(
+                        duration: Duration(microseconds: 100),
+                        curve: Curves.linear);
+                  },
                 ),
               ),
               SizedBox(
