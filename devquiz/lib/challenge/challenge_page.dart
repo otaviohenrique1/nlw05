@@ -2,6 +2,7 @@ import 'package:devquiz/challenge/challenge_controller.dart';
 import 'package:devquiz/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:devquiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:devquiz/challenge/widgets/quiz/quiz_widget.dart';
+import 'package:devquiz/result/result_page.dart';
 import 'package:devquiz/shared/models/question_model.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _ChallengePageState extends State<ChallengePage> {
               ),
               ValueListenableBuilder<int>(
                 valueListenable: controller.currentPageNotifier,
-                builder: (context, value, _) => QuestionIndicatorWidget(
+                builder: (context, value, child) => QuestionIndicatorWidget(
                   currentPage: value,
                   length: widget.questions.length,
                 ),
@@ -102,7 +103,12 @@ class _ChallengePageState extends State<ChallengePage> {
                     child: NextButtonWidget.green(
                       label: "Confirmar",
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ResultPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -114,9 +120,3 @@ class _ChallengePageState extends State<ChallengePage> {
     );
   }
 }
-
-/*
-  body: QuizWidget(
-    question: widget.questions[0],
-  ),
-*/

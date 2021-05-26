@@ -6,5 +6,5 @@ void main() {
 }
 
 /* 
-Trilha-Flutter -> Aula05 -> Tempo Video -> 00:00:00
+Trilha-Flutter -> Aula05 -> Tempo Video -> 00:17:02
 */
